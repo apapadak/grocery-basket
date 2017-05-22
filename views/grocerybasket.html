@@ -1,0 +1,90 @@
+
+<div class="container-fluid">
+
+    <br/>
+
+    <div class="row">
+        <b><u> Step 1. Click on an item to add it in the basket ! Alternatively, fill in the quantity that you wish &#33; </u></b>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="row">
+
+        <!-- create the horizontal list of products. You can simply add the info of a new product in $scope.products and it will appear here -->
+        <div ng-repeat="product in products track by product.id" class="col-md-3">
+            <button id="{{product.id}}IconAdd" ng-click="addProduct(product.id)" type="{{product.id}}Button"> <img ng-src="img/{{product.id}}.png" alt="{{product.id}}" height="200" width="200"> </button>
+            <div>
+                <b> <p class="product-description" ng-bind-html="product.description"></p> </b>
+            </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="controls">
+                    <a href="" id="{{product.id}}Add" ng-click="addProduct(product.id)" class="btn btn-default">&#43;</a>
+                    <a href="" id="{{product.id}}Remove" ng-click="removeProduct(product.id)" class="btn btn-default">&#45;</a>
+                </div>
+            </div>
+
+            <br/>
+
+            <div class="row">
+                <div class="quantity" ng-form name="myForm">
+                    <span> Qty: </span>
+                    <input type="number" size="2" id="{{product.id}}Qty" min="0" ng-model="product.quantity" readonly  />
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <br/>
+    <br/>
+
+    <div class="row">
+        <b><u> Step 2. Click on the checkout button to calculate the total cost of your basket. Or click on the clear button to clear your basket and restart &#33; </u></b>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <button id="checkoutButton" ng-click="checkoutBasket()" type="checkoutButton"> Checkout </button>
+
+        <button id="clearButton" ng-click="clearBasket()" type="clearButton"> Clear </button>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <b><u> Step 3. Here you can see the total cost of your basket. If you want to see it in different currencies, simply click on the respective currency symbol &#33; </u></b>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <span>
+            <!-- the value shows until 2 decimal places, since the values of the products are also until 2 decimal places -->
+            <span id="basketContent"> Total Cost of basket: {{ convertedCostValue != 0.00 ? convertedCostValue : baksetCostValueInPounds | number : 2}} </span>
+            <span id="basketContentCurrency" ng-bind-html="currentCurrency"> </span>
+            <span ng-if='convertedCostValue != 0.00'> (initial value in british pounds: {{baksetCostValueInPounds | number : 2}}&pound;) </span>
+        </span>
+    </div>
+
+    <br/>
+
+    <div class="row">
+        <span> Available currencies: </span>
+        <span ng-repeat="currency in currencies track by currency.id" >
+            <a id="{{currency.id}}" href="" ng-click="convert(currency.id)" ng-bind-html="currency.symbol" class="btn btn-default"></a>
+        </span>
+    </div>
+
+    <br/>
+    <br/>
+
+    <!-- this span appears in case jsonrates returns an error code -->
+    <span id="global-errors" role="alert" aria-live="assertive" class="field-error" ng-show="globalError" ng-bind-html="globalError"></span>
+
+</div>
+

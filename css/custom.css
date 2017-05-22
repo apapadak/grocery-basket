@@ -1,0 +1,43 @@
+
+/*
+ * A few CSS rules to make our app somewhat pretty :)
+ */
+
+body   {
+    padding: 0;
+    margin: 0;
+    line-height: 20px;
+    background-color: palegoldenrod;
+}
+
+.container    {
+    background: url('../img/background.jpg');
+    background-size: 1000px 800px;
+    background-repeat: no-repeat;
+
+    width: 1000px;
+}
+
+.product-description    {
+    margin: auto;
+    width: 90%;
+    padding: 4px;
+
+    height: 44px;
+}
+
+.controls    {
+    margin: auto;
+    width: 40%;
+    padding: 4px;
+}
+
+.quantity   {
+
+    margin: auto;
+    width: 44%;
+}
+
+input[type=number]{
+    width: 50px;
+}
