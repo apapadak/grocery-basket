@@ -1,0 +1,40 @@
+<!doctype html>
+<html class="" dir="" lang="en" data-ng-app="groceryApp">
+
+<head>
+    <!-- Meta Data ================ -->
+    <meta charset="UTF-8" />
+    <title>Grocery Basket in multiple currencies</title>
+    <meta name="description" content="My Shopping Basket" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!-- CSS ================ -->
+    <link href="vendor/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" media="screen">
+    <link href="css/custom.css" rel="stylesheet" media="screen">
+
+
+    <!-- SCRIPTS ============================================== -->
+    <script type="text/javascript" src="vendor/angular/angular.min.js"></script>
+    <script type="text/javascript" src="vendor/angular-route/angular-route.js"></script>
+    <script type="text/javascript" src="vendor/angular-mocks/angular-mocks.js"></script>
+    <script type="text/javascript" src="vendor/angular-resource/angular-resource.min.js"></script>
+    <script type="text/javascript" src="vendor/jquery/dist/jquery.js"></script>
+
+    <script type="text/javascript" src="main.js"></script>
+
+    <!-- CONTROLLERS ========================================== -->
+    <script type="text/javascript" src="views/grocerybasket.js"></script>
+
+    <!-- SERVICES ========================================== -->
+    <script type="text/javascript" src="services/web-service-dal.js"></script>
+</head>
+
+<body class="">
+    <div id="page-content" class="container">
+
+        <div ng-view></div>
+
+    </div>
+</body>
+
+</html>
