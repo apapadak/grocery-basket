@@ -1,6 +1,6 @@
 {
   "name": "grocery-basket",
-  "description": "A grocery basket for BJSS",
+  "description": "A grocery basket",
   "main": "src/main/webapp/app/index.html",
   "authors": [
     "Anthony Papadakis - Pesaresi"
@@ -11,12 +11,11 @@
     "maven"
   ],
   "homepage": "",
-  "private": true,
+  "private": false,
   "ignore": [
     "**/.*",
     "node_modules",
     "bower_components",
-    "src/main/webapp/app/vendor",
     "test",
     "tests"
   ],
