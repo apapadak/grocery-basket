@@ -5,6 +5,9 @@ exports.config = {
     directConnect: true, // Capabilities to be passed to the webdriver instance.
 
     allScriptsTimeout: 99999,
+	
+	// Do you want the output to use fun colors?
+    noColor: false,
 
     specs: [
         'src/test/javascript/e2e/*.js'

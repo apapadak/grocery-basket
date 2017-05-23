@@ -5,20 +5,22 @@ module.exports = function (grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
   grunt.loadNpmTasks('grunt-contrib-uglify');
   
+  grunt.loadNpmTasks('grunt-protractor-runner');
+  
   grunt.initConfig({
 	  
 	'pkg': grunt.file.readJSON('package.json'),  
 	  
     'meta': {
       'jsFilesForTesting': [
-	    'bower_components/angular/angular.js',
-        'bower_components/jquery/dist/jquery.js',
-		'bower_components/angular-loader/angular-loader.js',
-		'bower_components/angular-mocks/angular-mocks.js',		
-		'bower_components/angular-resource/angular-resource.js',
-        'bower_components/angular-route/angular-route.js',
-        'bower_components/bootstrap/dist/js/bootstrap.js',
-        'src/test/javascript/unit/*.js'
+	    'src/main/webapp/app/vendor/angular/angular.js',
+        'src/main/webapp/app/vendor/jquery/dist/jquery.js',
+		'src/main/webapp/app/vendor/angular-loader/angular-loader.js',
+		'src/main/webapp/app/vendor/angular-mocks/angular-mocks.js',		
+		'src/main/webapp/app/vendor/angular-resource/angular-resource.js',
+        'src/main/webapp/app/vendor/angular-route/angular-route.js',
+        'src/main/webapp/app/vendor/bootstrap/dist/js/bootstrap.js',
+        'src/test/javascript/e2e/*.js'
       ]
     },
 
@@ -29,7 +31,6 @@ module.exports = function (grunt) {
           'files': [
             '<%= meta.jsFilesForTesting %>',
 			'src/main/webapp/app/main.js',
-            'src/main/webapp/app/modals/*.js',
 			'src/main/webapp/app/services/*.js',
 			'src/main/webapp/app/views/*.js'
           ],
@@ -38,7 +39,7 @@ module.exports = function (grunt) {
 	},
 
 	'jshint': {
-      'beforeconcat': ['src/test/javascript/unit/*.js'],
+      'files': ['Gruntfile.js', 'src/test/javascript/e2e/*.js'],
     },
 
 	'concat': {
@@ -57,11 +58,28 @@ module.exports = function (grunt) {
           'dist/<%= pkg.namelower %>-<%= pkg.version %>.min.js': ['dist/<%= pkg.namelower %>-<%= pkg.version %>.js']
         }
       }
-    }
-
+    },
+	
+	protractor: {
+		options: {
+			configFile: "protractor-conf.js", // Location of your protractor config file
+			noColor: false,  // Do you want the output to use fun colors?
+			args: { }  // Additional arguments that are passed to the webdriver command
+		},
+		singlerun: {},
+		auto:	{
+			keepAlive: true, // Stops Grunt process if a test fails
+			options: {
+				args: {
+					seleniumPort: 4444
+				}
+			}
+		}
+	}
   });
 
   grunt.registerTask('test', ['karma:development']);
+  grunt.registerTask('default', ['jshint', 'protractor:singlerun']);
   grunt.registerTask('build',
     [
       'jshint',
