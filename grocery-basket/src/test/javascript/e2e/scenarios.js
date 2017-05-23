@@ -1,4 +1,7 @@
-'use strict';
+/* jshint node: true */
+/* globals describe, beforeEach, browser, it, element, expect,by, id */
+/* jasmine: true */
+"use strict";
 
 /* http://docs.angularjs.org/guide/dev_guide.e2e-testing */
 

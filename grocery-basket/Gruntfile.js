@@ -2,8 +2,13 @@ module.exports = function (grunt) {
 
   grunt.loadNpmTasks('grunt-karma');
   grunt.loadNpmTasks('grunt-contrib-jshint');
-
+  grunt.loadNpmTasks('grunt-contrib-concat');
+  grunt.loadNpmTasks('grunt-contrib-uglify');
+  
   grunt.initConfig({
+	  
+	'pkg': grunt.file.readJSON('package.json'),  
+	  
     'meta': {
       'jsFilesForTesting': [
 	    'bower_components/angular/angular.js',
@@ -13,7 +18,7 @@ module.exports = function (grunt) {
 		'bower_components/angular-resource/angular-resource.js',
         'bower_components/angular-route/angular-route.js',
         'bower_components/bootstrap/dist/js/bootstrap.js',
-        'src/test/javascript/**/*.js'
+        'src/test/javascript/unit/*.js'
       ]
     },
 
@@ -23,19 +28,46 @@ module.exports = function (grunt) {
         'options': {
           'files': [
             '<%= meta.jsFilesForTesting %>',
-			'src/main/webapp/app/main.js'
-            'src/main/webapp/app/modals/*.js'
-			'src/main/webapp/app/services/*.js'
+			'src/main/webapp/app/main.js',
+            'src/main/webapp/app/modals/*.js',
+			'src/main/webapp/app/services/*.js',
 			'src/main/webapp/app/views/*.js'
           ],
         }
       }
 	},
+
 	'jshint': {
       'beforeconcat': ['src/test/javascript/unit/*.js'],
+    },
+
+	'concat': {
+      'dist': {
+        'src': ['source/**/*.js'],
+        'dest': 'dist/<%= pkg.namelower %>-<%= pkg.version %>.js'
+      }
+    },
+
+    'uglify': {
+      'options': {
+        'mangle': false
+      },  
+      'dist': {
+        'files': {
+          'dist/<%= pkg.namelower %>-<%= pkg.version %>.min.js': ['dist/<%= pkg.namelower %>-<%= pkg.version %>.js']
+        }
+      }
     }
+
   });
 
   grunt.registerTask('test', ['karma:development']);
+  grunt.registerTask('build',
+    [
+      'jshint',
+      'karma:development',
+      'concat',
+      'uglify'
+    ]);
 
 };

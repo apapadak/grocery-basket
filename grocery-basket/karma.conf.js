@@ -3,11 +3,19 @@ module.exports = function(config){
 
         basePath : './',
 
+		// enable / disable watching file and executing tests whenever any file changes
         autoWatch : true,
 
+		// frameworks to use
+		// available frameworks: https://npmjs.org/browse/keyword/karma-adapter
         frameworks: ['jasmine'],
 
-        browsers : ['Chrome'],
+		// start these browsers
+		// available browser launchers: https://npmjs.org/browse/keyword/karma-launcher
+		browsers: ['PhantomJS'],
+		
+		// web server port
+		port: 9999,
 		
 		// enable / disable colors in the output (reporters and logs)
 		colors: true,
@@ -20,13 +28,18 @@ module.exports = function(config){
             'karma-chrome-launcher',
             'karma-firefox-launcher',
             'karma-jasmine',
-            'karma-junit-reporter'
+            'karma-junit-reporter',
+			'karma-phantomjs-launcher'
         ],
 
         junitReporter : {
             outputFile: 'target/test_out/unit.xml',
             suite: 'src/test/javascript/unit'
-        }
+        },
+		
+		// Continuous Integration mode
+		// if true, Karma captures browsers, runs the tests and exits
+		singleRun: true
 
     });
 };
